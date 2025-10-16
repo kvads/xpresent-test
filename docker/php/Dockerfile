@@ -33,7 +33,8 @@ COPY ./docker/common/php/conf.d $PHP_INI_DIR/conf.d
 COPY ./docker/common/php/php.conf /usr/local/etc/php-fpm.d/www.conf
 
 COPY ./docker/php/entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh && ln -s /usr/local/bin/entrypoint.sh /
+RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh && \
+    chmod +x /usr/local/bin/entrypoint.sh && ln -s /usr/local/bin/entrypoint.sh /
 
 ENTRYPOINT ["entrypoint.sh"]
 
